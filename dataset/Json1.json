@@ -1,0 +1,40 @@
+{
+	"name": "Json1",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "AzureBlobStorage1_linkedservice",
+			"type": "LinkedServiceReference"
+		},
+		"parameters": {
+			"container": {
+				"type": "string"
+			},
+			"foldername": {
+				"type": "string"
+			},
+			"filename": {
+				"type": "string"
+			}
+		},
+		"annotations": [],
+		"type": "Json",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobStorageLocation",
+				"fileName": {
+					"value": "@dataset().filename",
+					"type": "Expression"
+				},
+				"folderPath": {
+					"value": "@dataset().foldername",
+					"type": "Expression"
+				},
+				"container": {
+					"value": "@dataset().container",
+					"type": "Expression"
+				}
+			}
+		},
+		"schema": {}
+	}
+}
