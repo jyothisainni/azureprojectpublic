@@ -156,12 +156,15 @@
 							"userProperties": [],
 							"typeProperties": {
 								"dataset": {
-									"referenceName": "Parquet1_dataset",
+									"referenceName": "Json1",
 									"type": "DatasetReference",
 									"parameters": {
 										"container": "bronze",
-										"folder": "Users",
-										"file": "@concat(pipeline().parameters.src_table,'_',variables('current'))"
+										"foldername": "users",
+										"filename": {
+											"value": "@pipeline().parameters.src_table",
+											"type": "Expression"
+										}
 									}
 								},
 								"enableLogging": false,
