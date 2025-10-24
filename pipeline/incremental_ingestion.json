@@ -31,7 +31,7 @@
 					"source": {
 						"type": "AzureSqlSource",
 						"sqlReaderQuery": {
-							"value": "select * from @{pipeline().parameters.src_schema}.@{pipeline().parameters.src_table} where @{pipeline().parameters.src_cdc_col} > '@{activity('cdc_dates').output.value[0].cdc}'",
+							"value": "@concat('SELECT * FROM ', pipeline().parameters.src_schema, '.', pipeline().parameters.src_table, ' WHERE ', pipeline().parameters.src_cdc_col, ' > ''', activity('cdc_dates').output.value[0].cdc, '''')",
 							"type": "Expression"
 						},
 						"queryTimeout": "02:00:00",
@@ -270,7 +270,7 @@
 									{
 										"type": "Query",
 										"text": {
-											"value": "@concat('SELECT MAX(CAST(', pipeline().parameters.src_cdc_col, ' AS DATE)) AS cdc FROM ', pipeline().parameters.src_schema, '.', pipeline().parameters.src_table)\n",
+											"value": "@concat('SELECT MAX(', pipeline().parameters.src_cdc_col, ') AS cdc FROM ', pipeline().parameters.src_schema, '.', pipeline().parameters.src_table)\n",
 											"type": "Expression"
 										}
 									}
